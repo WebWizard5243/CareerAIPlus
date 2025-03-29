@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareerAIPlus</title>
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #212121;
+      color: #fff;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header/Navigation */
+    header {
+      background-color: #a9a9a9;
+      padding: 20px 25px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo svg {
+      width: 25px;
+      height: 25px;
+      margin-right: 7px;
+    }
+
+    nav {
+      color: black;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: black;
+      transition: all 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: rgb(239, 239, 239);
+    }
+
+    nav ul li a.active {
+      color: white;
+      /* background-color: white; */
+      font-weight: bolder;
+      /* border: 1px solid white; */
+      /* padding: 8px;
+          border-radius: 25px; */
+    }
+
+    .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            background: none;
+            border: none;
+            z-index: 1001;
+        }
+
+        .hamburger-line {
+            width: 100%;
+            height: 3px;
+            background-color: black;
+            transition: all 0.3s ease;
+        }
+    /* Main Content */
+    .main-content {
+      padding: 30px 0;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+    }
+
+    /* Cards */
+    .card {
+      background-color: #2a2a2a;
+      border-radius: 8px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .card p {
+      font-weight: 400;
+    }
+
+    /* Resume Upload */
+    .upload-area {
+      margin-top: 15px;
+      color: #a0a0a0;
+    }
+
+    /* AI Feedback */
+    .feedback-list {
+      list-style: none;
+      margin-top: 15px;
+    }
+
+    .feedback-list li {
+      margin-bottom: 10px;
+      line-height: 1.2;
+      font-size: 0.95rem;
+      font-weight: 100;
+    }
+
+    /* Resume Templates */
+    .templates-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .template-card {
+      background-color: #fff;
+      border-radius: 24px;
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+
+    .template-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .template-image {
+      width: 160px;
+      height: 160px;
+      display: block;
+      border-radius: 25px;
+      margin: 10px;
+    }
+
+    .template-btn {
+      display: block;
+      text-align: left;
+      padding: 12px;
+      background-color: #fff;
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+      margin-left: 10px;
+      margin-bottom: 10px;
+    }
+
+    /* LinkedIn Integration */
+    .connect-btn {
+      display: inline-block;
+      background-color: #e60023;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 500;
+      margin-top: 15px;
+      transition: background-color 0.3s;
+    }
+
+    .connect-btn:hover {
+      background-color: #d1001f;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #a9a9a9;
+      text-align: left;
+      padding: 20px;
+      margin-top: 10px;
+      color: black;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-evenly;
+    }
+
+    footer .footer-links a {
+      margin-bottom: 8px;
+      color: black;
+      text-decoration: none;
+    }
+
+    footer .footer-links a:hover {
+      color: rgb(239, 239, 239);
+      font-weight: bold;
+    }
+
+    .footer-links h3 {
+      font-weight: bold;
+      font-size: 1.15rem;
+    }
+
+    .footer-links p {
+      font-size: 1.05rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Media Queries */
+    @media (max-width: 768px) {
+      .main-content {
+        grid-template-columns: 1fr;
+        padding: 25px;
+      }
+
+      .templates-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+            nav ul {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #a9a9a9;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                z-index: 100;
+            }
+
+            nav ul li {
+                margin: 15px 0;
+                text-align: center;
+            }
+
+            .hamburger {
+                display: flex;
+                position: relative;
+                z-index: 1001;
+            }
+
+            /* Hamburger menu animation */
+            .hamburger.active .hamburger-line:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active .hamburger-line:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active .hamburger-line:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+            .footer-content{
+  display: flex;
+  justify-content: space-between;
+}
+.footer-links h3{
+  font-size: 0.90rem;
+}
+.footer-links a {
+  font-size: 0.75rem;
+}
+.footer-links p {
+  font-size: 0.80rem;
+}
+        }
+    @media (max-width: 480px) {
+      .templates-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header/Navigation -->
+  <header>
+    <nav>
+      <div class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+          <path fill="#000000"
+            d="M176 56l0 40 160 0 0-40c0-4.4-3.6-8-8-8L184 48c-4.4 0-8 3.6-8 8zM128 96l0-40c0-30.9 25.1-56 56-56L328 0c30.9 0 56 25.1 56 56l0 40 0 32 0 352-256 0 0-352 0-32zM64 96l32 0 0 384-32 0c-35.3 0-64-28.7-64-64L0 160c0-35.3 28.7-64 64-64zM448 480l-32 0 0-384 32 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64z" />
+        </svg>
+        CareerAIPlus
+      </div>
+      <button class="hamburger" aria-label="Toggle navigation">
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+    </button>
+      </div>
+      <ul class="navLinks">
+        <li><a href="./index.html">Home</a></li>
+        <li><a href="./careerAssesment.html">Career Assessment</a></li>
+        <li><a href="./Learning.html">Learning Roadmaps</a></li>
+        <li>
+          <a href="./mentorshipConnection.html">Mentorship Connections</a>
+        </li>
+        <li><a href="./resumeBuilder.html">Résumé Review</a></li>
+        <li><a href="./careerCounselling.html">Career Counseling</a></li>
+        <li><a href="./scholarship.html">Scholarships</a></li>
+      </ul>
+    </nav>
+  </header>
+  <!-- Main Content -->
+  <main class="container main-content">
+    <div class="left-column">
+      <!-- Resume Upload -->
+      <section class="card">
+        <h2 class="card-title">Upload Your Résumé</h2>
+        <div class="upload-area">Choose a file to upload...</div>
+      </section>
+
+      <!-- AI Feedback -->
+      <section class="card">
+        <h2 class="card-title">AI-Driven Feedback</h2>
+        <p>Your résumé has been analyzed. Here are some suggestions:</p>
+        <ul class="feedback-list">
+          <li>Improve the clarity of your job descriptions.</li>
+          <li>Consider adding more quantifiable achievements.</li>
+          <li>Use industry-specific keywords.</li>
+          <li>Ensure consistent formatting.</li>
+        </ul>
+      </section>
+
+      <!-- Resume Templates -->
+      <section class="card">
+        <h2 class="card-title">Auto-Generated Résumé Templates</h2>
+        <div class="templates-grid">
+          <div class="template-card">
+            <img src="./img/resumeDemo/resume1.jpeg" alt="Resume Template 1" class="template-image" />
+            <a href="#" class="template-btn">Use Template</a>
+          </div>
+          <div class="template-card">
+            <img src="./img/resumeDemo/resume2.jpeg" alt="Resume Template 2" class="template-image" />
+            <a href="#" class="template-btn">Use Template</a>
+          </div>
+          <div class="template-card">
+            <img src="./img/resumeDemo/resume3.jpeg" alt="Resume Template 3" class="template-image" />
+            <a href="#" class="template-btn">Use Template</a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="right-column">
+      <!-- LinkedIn Integration -->
+      <section class="card">
+        <h2 class="card-title">LinkedIn Integration</h2>
+        <p>
+          Connect your LinkedIn account to enhance your résumé with your
+          professional network and recommendations.
+        </p>
+        <a href="#" class="connect-btn">Connect LinkedIn</a>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-links">
+        <h3>CareerAIPlus</h3>
+        <p>Your partner <br> in career advancement</p>
+      </div>
+      <div class="footer-links">
+        <h3>Company</h3>
+        <a href="#">Careers</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact Us</a>
+      </div>
+      <div class="footer-links">
+        <h3>Resources</h3>
+        <a href="#">Blog</a>
+        <a href="#">Privacy Policy</a>
+        <a href="">Help Centre</a>
+      </div>
+    </div>
+  </footer>
+  <script src="./index.js"></script>
+</body>
+
+</html>

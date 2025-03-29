@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CareerAIPlus</title>
+    <style>
+      body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #111;
+  color: white;
+}
+header {
+  background-color: #a9a9a9;
+  padding: 20px 25px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.logo svg {
+  width: 25px;
+  height: 25px;
+  margin-right: 7px;
+}
+
+nav {
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: black;
+  transition: all 0.3s;
+}
+
+nav ul li a:hover {
+  color: rgb(239, 239, 239);
+}
+
+nav ul li a.active {
+  color: white;
+  /* background-color: white; */
+  font-weight: bolder;
+  /* border: 1px solid white; */
+  /* padding: 8px;
+      border-radius: 25px; */
+}
+
+.hamburger {
+        display: none;
+        cursor: pointer;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 25px;
+        background: none;
+        border: none;
+        z-index: 1001;
+    }
+
+    .hamburger-line {
+        width: 100%;
+        height: 3px;
+        background-color: black;
+        transition: all 0.3s ease;
+    }
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.feature {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 30px;
+  padding: 50px;
+}
+.feature1{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 30px;
+  padding: 50px;
+}
+.feature-img {
+  width: 250px;
+  height: auto;
+  border-radius: 10px;
+}
+.content {
+  line-height: 30px;
+}
+.content h2 {
+  margin-bottom: 10px;
+}
+.btn{
+  width: 100%;
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 25px;
+  margin-top: 10px;
+  transition: all 0.3s;
+}
+.btn:hover {
+  background-color: darkred;
+}
+footer {
+  background-color: #a9a9a9;
+  text-align: left;
+  padding: 20px;
+  margin-top: 50px;
+  color: black;
+}
+.footer-content {
+  display: flex;
+  justify-content: space-evenly;
+}
+footer .footer-links a {
+  margin-bottom: 8px;
+  color: black;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+footer .footer-links a:hover {
+  color: rgb(239, 239, 239);
+  font-weight: bold;
+}
+.footer-links h3 {
+  font-weight: bold;
+  font-size: 1.15rem;
+}
+.footer-links p {
+  font-size: 1.05rem;
+}
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+@media( max-width : 768px){
+  nav ul {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #a9a9a9;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+nav ul li {
+    margin: 15px 0;
+    text-align: center;
+}
+
+.hamburger {
+    display: flex;
+    position: relative;
+    z-index: 1001;
+}
+
+/* Hamburger menu animation */
+.hamburger.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+nav ul.show {
+    display: flex;
+}
+.footer-content{
+  display: flex;
+  justify-content: space-between;
+}
+.footer-links h3{
+  font-size: 0.90rem;
+}
+.footer-links a {
+  font-size: 0.75rem;
+}
+.footer-links p {
+  font-size: 0.80rem;
+}
+.feature{
+  flex-direction: column;
+}
+.feature1{
+  flex-direction: column-reverse;
+}
+}
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+            <path fill="#000000"
+              d="M176 56l0 40 160 0 0-40c0-4.4-3.6-8-8-8L184 48c-4.4 0-8 3.6-8 8zM128 96l0-40c0-30.9 25.1-56 56-56L328 0c30.9 0 56 25.1 56 56l0 40 0 32 0 352-256 0 0-352 0-32zM64 96l32 0 0 384-32 0c-35.3 0-64-28.7-64-64L0 160c0-35.3 28.7-64 64-64zM448 480l-32 0 0-384 32 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64z" />
+          </svg>
+          CareerAIPlus
+        </div>
+        <button class="hamburger" aria-label="Toggle navigation">
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+      </button>
+        </div>
+        <ul class="navLinks">
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./careerAssesment.html">Career Assessment</a></li>
+          <li><a href="./Learning.html">Learning Roadmaps</a></li>
+          <li>
+            <a href="./mentorshipConnection.html">Mentorship Connections</a>
+          </li>
+          <li><a href="./resumeBuilder.html">Résumé Review</a></li>
+          <li><a href="./careerCounselling.html">Career Counseling</a></li>
+          <li><a href="./scholarship.html">Scholarships</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="feature">
+        <img src="./img/introDemo/career.jpeg" class="feature-img" alt="Career Assessment" />
+        <div class="content">
+          <h2>Career Assessment</h2>
+          <p>
+            Discover your career strengths and interests with our comprehensive
+            career assessment tools.
+          </p>
+         <a href="./careerAssesment.html"> <button class="btn">Learn More</button></a>
+        </div>
+      </div>
+
+      <section class="feature1">
+        <div class="content">
+          <h2>Learning Roadmaps</h2>
+          <p>
+            Plan and track your learning journey with personalized roadmaps
+            tailored to your career goals.
+          </p>
+          <a href="./Learning.html"> <button class="btn">Learn More</button></a>
+        </div>
+        <img src="./img/introDemo/guidance.jpeg" class="feature-img" alt="Learning Roadmaps" />
+      </section>
+
+      <section class="feature">
+        <img src="./img/introDemo/mentorship.jpeg" class="feature-img" alt="Mentorship Connections" />
+        <div class="content">
+          <h2>Mentorship Connections</h2>
+          <p>
+            Connect with experienced mentors who can provide guidance and
+            support in your career journey.
+          </p>
+         <a href="./mentorshipConnection.html"> <button class="btn">Learn More</button></a>
+        </div>
+      </section>
+
+      <section class="feature1">
+        <div class="content">
+          <h2>Résumé Review</h2>
+          <p>
+            Get personalized feedback on your résumé to make it stand out to
+            potential employers.
+          </p>
+          <a href="./resumeBuilder.html"> <button class="btn" >Learn More</button></a>
+        </div>
+        <img src="./img/introDemo/resume.jpeg" class="feature-img" alt="Résumé Review" />
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-links">
+          <h3>CareerAIPlus</h3>
+          <p>Your partner <br> in career advancement</p>
+        </div>
+        <div class="footer-links">
+          <h3>Company</h3>
+          <a href="#">Careers</a>
+          <a href="#">About Us</a>
+          <a href="#">Contact Us</a>
+        </div>
+        <div class="footer-links">
+          <h3>Resources</h3>
+          <a href="#">Blog</a>
+          <a href="#">Privacy Policy</a>
+          <a href="">Help Centre</a>
+        </div>
+      </div>
+    </footer>
+    <script src="./index.js"></script>
+  </body>
+</html>
