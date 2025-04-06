@@ -233,6 +233,10 @@
             float: right;
             transition : all 0.3s;
         }
+        .schedule-btn a {
+            text-decoration: none;
+            color: white;
+        }
         .schedule-btn:hover{
             background-color: darkred;
         }
@@ -256,6 +260,10 @@
             cursor: pointer;
             margin-right: 15px;
             transition:  all 0.3s;
+        }
+        .video-call-btn a {
+            text-decoration: none;
+            color: white;
         }
         .video-call-btn:hover{
           background-color: white;
@@ -371,36 +379,7 @@ footer .footer-links a:hover {
 </head>
 <body>
     <!-- Navigation Bar -->
-    <header>
-      <nav>
-        <div class="logo">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-            <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-            <path fill="#000000"
-              d="M176 56l0 40 160 0 0-40c0-4.4-3.6-8-8-8L184 48c-4.4 0-8 3.6-8 8zM128 96l0-40c0-30.9 25.1-56 56-56L328 0c30.9 0 56 25.1 56 56l0 40 0 32 0 352-256 0 0-352 0-32zM64 96l32 0 0 384-32 0c-35.3 0-64-28.7-64-64L0 160c0-35.3 28.7-64 64-64zM448 480l-32 0 0-384 32 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64z" />
-          </svg>
-          CareerAIPlus
-        </div>
-        <button class="hamburger" aria-label="Toggle navigation">
-          <div class="hamburger-line"></div>
-          <div class="hamburger-line"></div>
-          <div class="hamburger-line"></div>
-      </button>
-        </div>
-        <ul class="navLinks">
-          <li><a href="./index.html">Home</a></li>
-          <li><a href="./careerAssesment.html">Career Assessment</a></li>
-          <li><a href="./Learning.html">Learning Roadmaps</a></li>
-          <li>
-            <a href="./mentorshipConnection.html">Mentorship Connections</a>
-          </li>
-          <li><a href="./resumeBuilder.html">Résumé Review</a></li>
-          <li><a href="./careerCounselling.html">Career Counseling</a></li>
-          <li><a href="./scholarship.html">Scholarships</a></li>
-        </ul>
-      </nav>
-    </header>
-    
+    <%- include('partials/header', {title: 'mentorship Connection ', page: 'assessment'}) %>
     <!-- Main Content -->
     <div class="container">
         <!-- Mentorship Header -->
@@ -412,21 +391,21 @@ footer .footer-links a:hover {
         <!-- Mentor Cards -->
         <div class="mentor-grid">
             <div class="mentor-card">
-                <img src="./img/mentorDemoImg/mentor1.jpeg" alt="John Smith" class="mentor-img">
+                <img src="/img/mentorDemoImg/mentor1.jpeg" alt="John Smith" class="mentor-img">
                 <h2 class="mentor-name">John Smith</h2>
                 <p class="mentor-title">Software Engineer at TechCorp</p>
                 <button class="view-profile-btn">View Profile</button>
             </div>
             
             <div class="mentor-card">
-                <img src="./img/mentorDemoImg/mentor2.jpeg" alt="Emily Johnson" class="mentor-img">
+                <img src="/img/mentorDemoImg/mentor2.jpeg" alt="Emily Johnson" class="mentor-img">
                 <h2 class="mentor-name">Emily Johnson</h2>
                 <p class="mentor-title">Data Analyst at InfoTech</p>
                 <button class="view-profile-btn">View Profile</button>
             </div>
             
             <div class="mentor-card">
-                <img src="./img/mentorDemoImg/mentor3.jpeg" alt="Michael Brown" class="mentor-img">
+                <img src="/img/mentorDemoImg/mentor3.jpeg" alt="Michael Brown" class="mentor-img">
                 <h2 class="mentor-name">Michael Brown</h2>
                 <p class="mentor-title">Product Manager at CreateX</p>
                 <button class="view-profile-btn">View Profile</button>
@@ -440,8 +419,16 @@ footer .footer-links a:hover {
                 <input type="text" placeholder="Search for mentors" class="search-input">
                 <button class="search-btn">Search</button>
             </div>
-            <p class="integration-info">Integration with Google Calendar & Zoom API</p>
-            <button class="schedule-btn">Schedule Now</button>
+            <% if (locals.link){ %>
+            <a class="integration-info" href = <%=link %> > Check your schedule here</a>
+            <% } else { %>
+                <form action="/auth" method="get">
+                <input type="date" name="date" required>
+                <input type="time" name = "time" required>
+                <button class="schedule-btn" type="submit">Schedule Now </button>
+            </form>
+                <% } %>
+           
             <div style="clear:both;"></div>
         </div>
         
@@ -452,33 +439,14 @@ footer .footer-links a:hover {
             <input type="text" placeholder="Type your message..." class="message-input">
             <button class="send-btn">Send</button>
         </div>
-            <button class="video-call-btn">Start Video Call</button>
+            <button class="video-call-btn"><a href= <%= locals.link? zoomLink : null %> >Start Video Call</a></button>
             <div style="clear:both;"></div>
         </div>
     </div>
-    <footer>
-        <div class="footer-content">
-          <div class="footer-links">
-            <h3>CareerAIPlus</h3>
-            <p>Your partner <br> in career advancement</p>
-          </div>
-          <div class="footer-links">
-            <h3>Company</h3>
-            <a href="#">Careers</a>
-            <a href="#">About Us</a>
-            <a href="#">Contact Us</a>
-          </div>
-          <div class="footer-links">
-            <h3>Resources</h3>
-            <a href="#">Blog</a>
-            <a href="#">Privacy Policy</a>
-            <a href="">Help Centre</a>
-          </div>
-        </div>
-      </footer>
+    <%- include('partials/footer') %>
     <!-- Font Awesome for icons -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
-    <script src="./index.js">
+    <script src="/js/index.js">
     </script>
 </body>
 </html>

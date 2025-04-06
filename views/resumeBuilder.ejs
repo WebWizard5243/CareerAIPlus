@@ -103,7 +103,7 @@
     .main-content {
       padding: 30px 0;
       display: grid;
-      grid-template-columns: 2fr 1fr;
+      grid-template-columns: 1fr;
       gap: 20px;
     }
 
@@ -131,13 +131,22 @@
       margin-top: 15px;
       color: #a0a0a0;
     }
-
+    
     /* AI Feedback */
     .feedback-list {
       list-style: none;
       margin-top: 15px;
     }
-
+    #submit {
+      float: right;
+      padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 25px;
+    background-color: red;
+    color: white;
+    transition: all 0.3s;
+    }
     .feedback-list li {
       margin-bottom: 10px;
       line-height: 1.2;
@@ -151,6 +160,7 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 15px;
       margin-top: 20px;
+      margin-bottom: 110px;
     }
 
     .template-card {
@@ -182,8 +192,16 @@
       font-weight: 500;
       margin-left: 10px;
       margin-bottom: 10px;
+      border-radius: 25px;
+      width: 15vw;
     }
-
+    .template-btn:hover{
+      background-color: #bebbbb;
+    }
+    .file-title {
+      color: black;
+      margin-left: 15px;
+    }
     /* LinkedIn Integration */
     .connect-btn {
       display: inline-block;
@@ -316,79 +334,59 @@
 
 <body>
   <!-- Header/Navigation -->
-  <header>
-    <nav>
-      <div class="logo">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-          <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-          <path fill="#000000"
-            d="M176 56l0 40 160 0 0-40c0-4.4-3.6-8-8-8L184 48c-4.4 0-8 3.6-8 8zM128 96l0-40c0-30.9 25.1-56 56-56L328 0c30.9 0 56 25.1 56 56l0 40 0 32 0 352-256 0 0-352 0-32zM64 96l32 0 0 384-32 0c-35.3 0-64-28.7-64-64L0 160c0-35.3 28.7-64 64-64zM448 480l-32 0 0-384 32 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64z" />
-        </svg>
-        CareerAIPlus
-      </div>
-      <button class="hamburger" aria-label="Toggle navigation">
-        <div class="hamburger-line"></div>
-        <div class="hamburger-line"></div>
-        <div class="hamburger-line"></div>
-    </button>
-      </div>
-      <ul class="navLinks">
-        <li><a href="./index.html">Home</a></li>
-        <li><a href="./careerAssesment.html">Career Assessment</a></li>
-        <li><a href="./Learning.html">Learning Roadmaps</a></li>
-        <li>
-          <a href="./mentorshipConnection.html">Mentorship Connections</a>
-        </li>
-        <li><a href="./resumeBuilder.html">Résumé Review</a></li>
-        <li><a href="./careerCounselling.html">Career Counseling</a></li>
-        <li><a href="./scholarship.html">Scholarships</a></li>
-      </ul>
-    </nav>
-  </header>
+  <%- include('partials/header', {title: ' resume Review ', page: 'assessment'}) %>
   <!-- Main Content -->
   <main class="container main-content">
     <div class="left-column">
       <!-- Resume Upload -->
       <section class="card">
+        <form action="/ResumeReview" method="post" enctype="multipart/form-data">
         <h2 class="card-title">Upload Your Résumé</h2>
-        <div class="upload-area">Choose a file to upload...</div>
+        <input type="file" class="choose-file" name="resume" >
+        <input type="submit" id="submit">
+      </form>
+        
       </section>
 
       <!-- AI Feedback -->
       <section class="card">
         <h2 class="card-title">AI-Driven Feedback</h2>
+        <% if(locals.review){ %>
         <p>Your résumé has been analyzed. Here are some suggestions:</p>
         <ul class="feedback-list">
-          <li>Improve the clarity of your job descriptions.</li>
-          <li>Consider adding more quantifiable achievements.</li>
-          <li>Use industry-specific keywords.</li>
-          <li>Ensure consistent formatting.</li>
+          <li><%= review.summary %></li>
+          <li><%= review.formattingFeedback %></li>
+          <li><%= review.clarityFeedback %></li>
+          <li> <%= review.grammarFeedback %></li>
+          <li> Rating : <%= review.rating %></li>
         </ul>
+        <% } else { %>
+          <p> Your Review will be shown here</p>
+          <% } %>
       </section>
 
       <!-- Resume Templates -->
       <section class="card">
         <h2 class="card-title">Auto-Generated Résumé Templates</h2>
         <div class="templates-grid">
-          <div class="template-card">
-            <img src="./img/resumeDemo/resume1.jpeg" alt="Resume Template 1" class="template-image" />
-            <a href="#" class="template-btn">Use Template</a>
-          </div>
-          <div class="template-card">
-            <img src="./img/resumeDemo/resume2.jpeg" alt="Resume Template 2" class="template-image" />
-            <a href="#" class="template-btn">Use Template</a>
-          </div>
-          <div class="template-card">
-            <img src="./img/resumeDemo/resume3.jpeg" alt="Resume Template 3" class="template-image" />
-            <a href="#" class="template-btn">Use Template</a>
-          </div>
+          <% if(locals.files){ %>
+          <% files.forEach((file, index) => { %>
+            <div class="template-card">
+              <img src="/img/resumeDemo/resume<%= index + 1 %>.jpeg" alt="Resume Template <%= index + 1 %>" class="template-image" />
+              <h3 class="file-title"><%= file.title %></h3>
+              <a href=<%= file.downloadUrl %> class="template-btn">download Template</a>
+            </div>
+          <% }) %>
+          <% } else { %>
+            <p> Sample Resume will be generated for you to download based on your uploaded resume.</p>
+            <% } %>
         </div>
       </section>
     </div>
 
-    <div class="right-column">
-      <!-- LinkedIn Integration -->
-      <section class="card">
+    <!-- <div class="right-column">
+      LinkedIn Integration -->
+      <!-- <section class="card">
         <h2 class="card-title">LinkedIn Integration</h2>
         <p>
           Connect your LinkedIn account to enhance your résumé with your
@@ -396,31 +394,12 @@
         </p>
         <a href="#" class="connect-btn">Connect LinkedIn</a>
       </section>
-    </div>
+    </div> --> 
   </main>
 
   <!-- Footer -->
-  <footer>
-    <div class="footer-content">
-      <div class="footer-links">
-        <h3>CareerAIPlus</h3>
-        <p>Your partner <br> in career advancement</p>
-      </div>
-      <div class="footer-links">
-        <h3>Company</h3>
-        <a href="#">Careers</a>
-        <a href="#">About Us</a>
-        <a href="#">Contact Us</a>
-      </div>
-      <div class="footer-links">
-        <h3>Resources</h3>
-        <a href="#">Blog</a>
-        <a href="#">Privacy Policy</a>
-        <a href="">Help Centre</a>
-      </div>
-    </div>
-  </footer>
-  <script src="./index.js"></script>
+  <%- include('partials/footer') %>
+  <script src="/js/index.js"></script>
 </body>
 
 </html>

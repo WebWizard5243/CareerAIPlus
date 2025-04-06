@@ -228,35 +228,7 @@ nav ul.show {
     </style>
   </head>
   <body>
-    <header>
-      <nav>
-        <div class="logo">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-            <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-            <path fill="#000000"
-              d="M176 56l0 40 160 0 0-40c0-4.4-3.6-8-8-8L184 48c-4.4 0-8 3.6-8 8zM128 96l0-40c0-30.9 25.1-56 56-56L328 0c30.9 0 56 25.1 56 56l0 40 0 32 0 352-256 0 0-352 0-32zM64 96l32 0 0 384-32 0c-35.3 0-64-28.7-64-64L0 160c0-35.3 28.7-64 64-64zM448 480l-32 0 0-384 32 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64z" />
-          </svg>
-          CareerAIPlus
-        </div>
-        <button class="hamburger" aria-label="Toggle navigation">
-          <div class="hamburger-line"></div>
-          <div class="hamburger-line"></div>
-          <div class="hamburger-line"></div>
-      </button>
-        </div>
-        <ul class="navLinks">
-          <li><a href="./index.html">Home</a></li>
-          <li><a href="./careerAssesment.html">Career Assessment</a></li>
-          <li><a href="./Learning.html">Learning Roadmaps</a></li>
-          <li>
-            <a href="./mentorshipConnection.html">Mentorship Connections</a>
-          </li>
-          <li><a href="./resumeBuilder.html">Résumé Review</a></li>
-          <li><a href="./careerCounselling.html">Career Counseling</a></li>
-          <li><a href="./scholarship.html">Scholarships</a></li>
-        </ul>
-      </nav>
-    </header>
+    <%- include('partials/header', {title: 'Home ', page: 'Home'}) %>
     <main>
       <div class="feature">
         <img src="./img/introDemo/career.jpeg" class="feature-img" alt="Career Assessment" />
@@ -266,7 +238,7 @@ nav ul.show {
             Discover your career strengths and interests with our comprehensive
             career assessment tools.
           </p>
-         <a href="./careerAssesment.html"> <button class="btn">Learn More</button></a>
+         <a href="/careerAssessment"> <button class="btn">Learn More</button></a>
         </div>
       </div>
 
@@ -277,7 +249,7 @@ nav ul.show {
             Plan and track your learning journey with personalized roadmaps
             tailored to your career goals.
           </p>
-          <a href="./Learning.html"> <button class="btn">Learn More</button></a>
+          <a href="/learningRoadmaps"> <button class="btn">Learn More</button></a>
         </div>
         <img src="./img/introDemo/guidance.jpeg" class="feature-img" alt="Learning Roadmaps" />
       </section>
@@ -290,7 +262,7 @@ nav ul.show {
             Connect with experienced mentors who can provide guidance and
             support in your career journey.
           </p>
-         <a href="./mentorshipConnection.html"> <button class="btn">Learn More</button></a>
+         <a href="/MentorshipConnection"> <button class="btn">Learn More</button></a>
         </div>
       </section>
 
@@ -301,32 +273,13 @@ nav ul.show {
             Get personalized feedback on your résumé to make it stand out to
             potential employers.
           </p>
-          <a href="./resumeBuilder.html"> <button class="btn" >Learn More</button></a>
+          <a href="./resumeReview"> <button class="btn" >Learn More</button></a>
         </div>
         <img src="./img/introDemo/resume.jpeg" class="feature-img" alt="Résumé Review" />
       </section>
     </main>
 
-    <footer>
-      <div class="footer-content">
-        <div class="footer-links">
-          <h3>CareerAIPlus</h3>
-          <p>Your partner <br> in career advancement</p>
-        </div>
-        <div class="footer-links">
-          <h3>Company</h3>
-          <a href="#">Careers</a>
-          <a href="#">About Us</a>
-          <a href="#">Contact Us</a>
-        </div>
-        <div class="footer-links">
-          <h3>Resources</h3>
-          <a href="#">Blog</a>
-          <a href="#">Privacy Policy</a>
-          <a href="">Help Centre</a>
-        </div>
-      </div>
-    </footer>
-    <script src="./index.js"></script>
+    <%- include('partials/footer') %>
+    <script src="/js/index.js"></script>
   </body>
 </html>

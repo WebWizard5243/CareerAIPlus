@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerAIPlus</title>
+   <link rel="stylesheet" href="/css/assessment.css">
+</head>
+<body> 
+  <%- include('partials/header', {title: 'Career Assessment', page: 'assessment'}) %>
+
+  <div class="container">
+    <div class="box">
+        <h2>Career Assessment</h2>
+        <p>Discover your ideal career path by inputting your skills, interests, and aspirations. Take our AI-driven quizzes and receive personalized career suggestions.</p>
+        <form action="/careerAssessment" method="post">
+        <h3>Skills</h3>
+        <input type="text" class="input-box" name="skills" id="careerInput" placeholder="Enter Your Skills,separated by comma">
+        <h3>Interests</h3>
+        <input type="text" class="input-box"id="careerInput" name="interests"  placeholder="Enter your Interests,separated by comma">
+        <h3>Aspirations</h3>
+        <input type="text" class="input-box" id="careerInput" name="aspirations"  placeholder="Enter Your skills,separated by comma">
+        <input type="submit" class="button submit"  value="Submit">
+    </form>
+    </div>
+    <% if(locals.data){ %>
+    <div class="box">
+        <h3>AI-Driven Career Suggestions</h3>
+        <div class="career-suggestions">
+            <% data.careerPaths.forEach((career) => { %>
+            <div class="suggestion">
+                <h3><%=career.title %></h3>
+                <h4><%= career.path %></h4>
+                <br>
+                <p><%=career.description %></p></div>
+            <% })%>
+            <!-- <div class="suggestion"> <h3>UX Designer</h3><br><p>Combine your creativity and technical skills to design user-friendly interfaces.</p> </div> -->
+        </div>
+    </div>
+    <% } %>
+    <!-- <div class="box quiz-section">
+        <h3>Take a Career Quiz</h3>
+        <div class="btn">
+        <button class="button start-quiz">Start Quiz</button>
+        <button class="button review-results">Review Results</button>
+    </div> -->
+    </div>
+</div>
+  
+  <%- include('partials/footer') %>
+  <script src="/js/index.js"></script>
+</body>
+</html>
